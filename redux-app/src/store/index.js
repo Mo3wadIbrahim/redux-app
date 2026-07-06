@@ -1,3 +1,5 @@
+import { createStore } from "redux";
+
 const INITIAL_STATE = {
   counter: 0,
 };
@@ -17,15 +19,7 @@ function counterReducer(state = INITIAL_STATE, action) {
 
   return state;
 }
-// eslint-disable-next-line no-undef
-const redux = require("redux");
-const store = redux.createStore(counterReducer);
-function counterSubscriber() {
-  const lastState = store.getState();
-  console.log(lastState);
-}
-
-store.subscribe(counterSubscriber);
+const store = createStore(counterReducer);
 
 store.dispatch({ type: "increment" });
 store.dispatch({ type: "increment" });
