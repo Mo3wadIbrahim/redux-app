@@ -16,6 +16,12 @@ function counterReducer(state = INITIAL_STATE, action) {
       counter: state.counter - 1,
     };
   }
+  if (action.type === "toggle") {
+    return {
+      ...state,
+      counter: state.counter * -1,
+    };
+  }
 
   return state;
 }
