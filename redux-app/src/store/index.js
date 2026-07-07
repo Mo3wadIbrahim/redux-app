@@ -21,6 +21,4 @@ function counterReducer(state = INITIAL_STATE, action) {
 }
 const store = createStore(counterReducer);
 
-store.dispatch({ type: "increment" });
-store.dispatch({ type: "increment" });
-store.dispatch({ type: "decrement" });
+export default store;
