@@ -1,9 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import classes from "./Counter.module.css";
 
 // // // // // // * Functional Component * // // // // // //
 const Counter = () => {
+  const [isIncrease, setIsIncrease] = useState(false);
+  const [payloadInput, setPayloadInput] = useState("");
   const counter = useSelector((state) => state.counter);
+  const showCounter = useSelector((state) => state.showCounter);
   const dispatch = useDispatch();
   const toggleCounterHandler = () => {
     dispatch({ type: "toggle" });
@@ -14,15 +18,43 @@ const Counter = () => {
   const handleDecrement = () => {
     dispatch({ type: "decrement" });
   };
+  const handleIncrease = () => {
+    dispatch({ type: "increase", payload: +payloadInput });
+    setIsIncrease(false);
+    setPayloadInput("");
+  };
+  const handleChangePayload = (value) => {
+    setPayloadInput(value);
+  };
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}> {counter} </div>
+      {showCounter && <div className={classes.value}> {counter} </div>}
       <div>
-        <button onClick={handleIncrement}>Increment</button>
-        <button onClick={handleDecrement}>Decrement</button>
+        <button disabled={isIncrease} onClick={handleIncrement}>
+          Increment
+        </button>
+        {isIncrease && (
+          <div>
+            <input
+              type="number"
+              required
+              value={payloadInput}
+              onChange={(event) => handleChangePayload(event.target.value)}
+            />
+            <button onClick={handleIncrease}>Increase</button>
+          </div>
+        )}
+        {!isIncrease && (
+          <button onClick={() => setIsIncrease(true)}>Increase</button>
+        )}
+        <button disabled={isIncrease} onClick={handleDecrement}>
+          Decrement
+        </button>
       </div>
-      <button onClick={toggleCounterHandler}>Toggle Counter</button>
+      <button disabled={isIncrease} onClick={toggleCounterHandler}>
+        Toggle Counter
+      </button>
     </main>
   );
 };
