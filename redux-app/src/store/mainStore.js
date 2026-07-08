@@ -1,15 +1,13 @@
 // // // // // // * Redux Toolkit * // // // // // //
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-import authSlice from "./auth";
-import counterSlice from "./counter";
+import authReducer from "./auth";
+import counterReducer from "./counter";
 
 const mainStore = configureStore({
-  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+  reducer: { counter: counterReducer, auth: authReducer },
 });
 
-export const counterActions = counterSlice.actions;
-export const authActions = authSlice.actions;
 export default mainStore;
 
 // // // // // // * Redux Toolkit * // // // // // //

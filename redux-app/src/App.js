@@ -5,7 +5,7 @@ import UserProfile from "./components/UserProfile";
 import { Fragment } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "./store/mainStore";
+import { authActions } from "./store/auth";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
