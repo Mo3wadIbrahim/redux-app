@@ -1,26 +1,25 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import classes from "./Counter.module.css";
-import { actions } from "../store/index.js";
-
+import { counterActions } from "../store/index";
 // // // // // // * Functional Component * // // // // // //
 const Counter = () => {
   const [isIncrease, setIsIncrease] = useState(false);
   const [payloadInput, setPayloadInput] = useState("");
-  const counter = useSelector((state) => state.counter);
-  const showCounter = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const showCounter = useSelector((state) => state.counter.showCounter);
   const dispatch = useDispatch();
   const toggleCounterHandler = () => {
-    dispatch({ type: actions.toggle });
+    dispatch(counterActions.toggle());
   };
   const handleIncrement = () => {
-    dispatch({ type: actions.increment });
+    dispatch(counterActions.increment());
   };
   const handleDecrement = () => {
-    dispatch({ type: actions.decrement });
+    dispatch(counterActions.decrement());
   };
   const handleIncrease = () => {
-    dispatch({ type: actions.increase, payload: +payloadInput });
+    dispatch(counterActions.increase(+payloadInput || 0));
     setIsIncrease(false);
     setPayloadInput("");
   };
